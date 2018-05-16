@@ -316,7 +316,7 @@ public class UserLoginActivity extends AppCompatActivity {
 
     private void gotoMainActivity() {
         dialog.dismiss();
-        Intent intent = new Intent(UserLoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(UserLoginActivity.this, CategoryActivity.class);
         startActivity(intent);
         finish();
     }

@@ -52,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
                     if (email.contains("firebase")) {
                         intent = new Intent(SplashActivity.this, SellerDashboardActivity.class);
                     } else {
-                        intent = new Intent(SplashActivity.this, MainActivity.class);
+                        intent = new Intent(SplashActivity.this, CategoryActivity.class);
                     }
                     startActivity(intent);
                     finish();
