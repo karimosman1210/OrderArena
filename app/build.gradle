@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.amoharib.foodorderapp"
+        applicationId "com.amoharib.graduationproject"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
@@ -56,8 +56,8 @@ dependencies {
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
     implementation 'com.google.guava:guava:24.1-android'
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
 }
-
 
 
 

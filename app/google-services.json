@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "595013548959",
-    "firebase_url": "https://onlinefoodapplication.firebaseio.com",
-    "project_id": "onlinefoodapplication",
-    "storage_bucket": "onlinefoodapplication.appspot.com"
+    "project_number": "66164643176",
+    "firebase_url": "https://graduationproject-b4243.firebaseio.com",
+    "project_id": "graduationproject-b4243",
+    "storage_bucket": "graduationproject-b4243.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:595013548959:android:ca38f7b561b47bc2",
+        "mobilesdk_app_id": "1:66164643176:android:405507bf8c6062ca",
         "android_client_info": {
-          "package_name": "com.amoharib.foodorderapp"
+          "package_name": "com.amoharib.graduationproject"
         }
       },
       "oauth_client": [
         {
-          "client_id": "595013548959-j5h967085780dnapkvirodsdh3tpkeb5.apps.googleusercontent.com",
+          "client_id": "66164643176-o6ljou0nj8uhrrikgv22licj511uj2ek.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.amoharib.foodorderapp",
+            "package_name": "com.amoharib.graduationproject",
             "certificate_hash": "4511993213efdce1d0ed7d7f2a0a963e91eca98f"
           }
         },
         {
-          "client_id": "595013548959-jo30c13da83mo1264t9pqovcd15h597i.apps.googleusercontent.com",
+          "client_id": "66164643176-sirb4d9584dv02d2s7i2dundo4blkbnu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDg1UGw1UH2tWrsKRO6ROpoIXrrKKengi4"
+          "current_key": "AIzaSyA_GyvBfWwfWiI3za4ksY05TOFhj-0RIP8"
         }
       ],
       "services": {
@@ -40,15 +40,8 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "595013548959-jo30c13da83mo1264t9pqovcd15h597i.apps.googleusercontent.com",
+              "client_id": "66164643176-sirb4d9584dv02d2s7i2dundo4blkbnu.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "595013548959-quq11virln51tcen6u1d78hm9av3i2ck.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.moharib.OrderApplication"
-              }
             }
           ]
         },

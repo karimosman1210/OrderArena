@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FoodOrderApp</string>
+    <string name="app_name">Orders Arena</string>
     <string name="add_new_address">Add New Address</string>
     <string name="address_name">Address Name *</string>
     <string name="street_number">Street/Number *</string>
@@ -54,8 +54,8 @@
 
     <!-- facebook -->
 
-    <string name="facebook_app_id">2061748847436115</string>
-    <string name="fb_login_protocol_scheme">fb2061748847436115</string>
+    <string name="facebook_app_id">174930716502604</string>
+    <string name="fb_login_protocol_scheme">fb174930716502604</string>
     <string name="continue_with_facebook">Continue With Facebook</string>
     <string name="phone_number">Phone Number</string>
     <string name="please_enter_the_verification_code">Please enter the verification code</string>
