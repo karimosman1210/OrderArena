@@ -66,6 +66,7 @@
             app:layout_constraintBottom_toBottomOf="@id/logoText"
             app:layout_constraintEnd_toEndOf="@id/logoText" />
 
+
         <ProgressBar
             android:id="@+id/progress_loader"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"

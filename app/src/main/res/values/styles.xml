@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
     <style name="AppTheme.WhiteAccent">
         <item name="colorAccent">@color/splashAccentColor</item>
     </style>
