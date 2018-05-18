@@ -9,7 +9,7 @@
     </style>
 
     <style name="AppTheme.WhiteAccent">
-        <item name="colorAccent">#3c586e</item>
+        <item name="colorAccent">@color/splashAccentColor</item>
     </style>
 
     <style name="CustomTextInputTheme" parent="Theme.AppCompat">
