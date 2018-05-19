@@ -49,9 +49,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private SectionedRecyclerViewAdapter adapter;
 
-    private DatabaseReference mDatabase;
     private Restaurant restaurant;
-    private ArrayList<Food> foods;
     private CounterFab cartFab;
 
     public static ArrayList<CartItem> cartItems;
@@ -65,7 +63,6 @@ public class MenuActivity extends AppCompatActivity {
         cartItems = new ArrayList<>();
         restaurantID = restaurant.getId();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         DataService.getInstance().getMenuForRestaurantId(restaurantID, new DataListeners.OnMenuListener() {
             @Override
