@@ -4,6 +4,7 @@ import com.amoharib.graduationproject.models.Address;
 import com.amoharib.graduationproject.models.Food;
 import com.amoharib.graduationproject.models.Order;
 import com.amoharib.graduationproject.models.Restaurant;
+import com.amoharib.graduationproject.models.HyperMarket;
 import com.amoharib.graduationproject.models.User;
 import com.amoharib.graduationproject.utils.OrderStatus;
 import com.google.firebase.auth.FirebaseUser;
@@ -46,6 +47,9 @@ public abstract class DataListeners {
 
     public interface OnRestaurantsListener {
         public void onDataRetrieved(ArrayList<Restaurant> restaurants);
+    }
+    public interface OnHyperMarketsListener {
+        public void onDataRetrieved(ArrayList<HyperMarket> hypermarket);
     }
 
     public interface OnOrderListener {

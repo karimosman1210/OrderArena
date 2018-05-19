@@ -78,5 +78,7 @@
 
 
     <string name="default_notification_channel_id">my_channel_01</string>
+    <string name="title_activity_main__hyper__market">MainActivity_Hyper_Market</string>
+    <string name="title_activity_hyper_market">HyperMarketActivity</string>
 
 </resources>

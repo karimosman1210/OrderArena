@@ -12,6 +12,7 @@ import com.amoharib.graduationproject.models.CartItem;
 import com.amoharib.graduationproject.models.Food;
 import com.amoharib.graduationproject.models.Order;
 import com.amoharib.graduationproject.models.Restaurant;
+import com.amoharib.graduationproject.models.HyperMarket;
 import com.amoharib.graduationproject.models.User;
 import com.amoharib.graduationproject.utils.OrderStatus;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,6 +48,7 @@ public class DataService {
     private DatabaseReference userOrdersDB = db.child("user-order");
     private DatabaseReference restOrderDB = db.child("rest-order");
     private DatabaseReference restDB = db.child("restaurants");
+    private DatabaseReference hypermarketDB = db.child("hyper-markets");
     private DatabaseReference usersDB = db.child("users");
     private DatabaseReference categoryDB = db.child("category");
     private DatabaseReference menuDB = db.child("menu");
@@ -186,7 +188,25 @@ public class DataService {
             }
         });
     }
+    public void getAllHyperMarket(final DataListeners.OnHyperMarketsListener onHyperMarketsListener) {
 
+        final ArrayList<HyperMarket> hypermarkets = new ArrayList<>();
+        hypermarketDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    HyperMarket hypermarket = child.getValue(HyperMarket.class);
+                    hypermarkets.add(hypermarket);
+                }
+                onHyperMarketsListener.onDataRetrieved(hypermarkets);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
     public void getUsersOrders(String uid, final DataListeners.OnOrderListener onOrderListener) {
 
         userOrdersDB.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -507,4 +527,5 @@ public class DataService {
     public void addTokenToUser(String userId, String token) {
         usersDB.child(userId).child("token").setValue(token);
     }
+
 }

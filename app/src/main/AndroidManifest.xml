@@ -105,7 +105,11 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
 
-        <activity android:name=".buyer.activities.CategoryActivity"></activity>
+        <activity android:name=".buyer.activities.CategoryActivity" />
+        <activity
+            android:name=".hypermarket.activities.HyperMarketActivity"
+            android:label="@string/title_activity_hyper_market" />
+        <activity android:name=".hypermarket.activities.MenuHyperMarketActivity"></activity>
     </application>
 
 </manifest>
