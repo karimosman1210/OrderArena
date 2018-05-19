@@ -1,6 +1,7 @@
 package com.amoharib.graduationproject.buyer.activities;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.hardware.display.VirtualDisplay;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -160,6 +161,8 @@ public class SplashActivity extends AppCompatActivity {
         cartLogo = (ImageView) findViewById(R.id.cart_logo);
         textBar = (ImageView) findViewById(R.id.text_bar);
         slogan = (ImageView) findViewById(R.id.slogan);
+
+        progressLoader.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.splashAccentColor), PorterDuff.Mode.SRC_IN);
     }
 
 //    private void initTextAnimation() {
