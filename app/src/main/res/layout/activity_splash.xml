@@ -22,10 +22,12 @@
         android:visibility="gone" />
 
     <ImageView
+        android:id="@+id/logo_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/logo_bg" />
+        android:src="@drawable/logo_bg"
+        android:visibility="invisible" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="wrap_content"
@@ -36,35 +38,46 @@
             android:id="@+id/logoText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/logoTxt"
+            android:src="@drawable/logo_txt"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/cart_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:layout_marginStart="8dp"
             android:src="@drawable/cart_logo"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/logoText"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
+            android:id="@+id/text_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:src="@drawable/textBar"
+            android:src="@drawable/text_bar"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/logoText"
             app:layout_constraintEnd_toEndOf="@id/logoText" />
 
-        <ImageView
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/slogan"
-            app:layout_constraintBottom_toBottomOf="@id/logoText"
-            app:layout_constraintEnd_toEndOf="@id/logoText" />
+            app:layout_constraintEnd_toEndOf="@id/logoText"
+            app:layout_constraintTop_toBottomOf="@id/text_bar">
+            <ImageView
+                android:id="@+id/slogan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/slogan"
+                android:visibility="invisible" />
+        </FrameLayout>
 
 
         <ProgressBar
@@ -76,6 +89,7 @@
             android:layout_marginTop="22dp"
             android:indeterminate="true"
             android:theme="@style/AppTheme.WhiteAccent"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/logoText" />
