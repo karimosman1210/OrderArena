@@ -93,6 +93,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/logoText" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_animation"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:lottie_fileName="loading_and_done.json"
+            app:lottie_autoPlay="true"
+            app:lottie_colorFilter="@color/splashAccentColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logoText" />
+
     </android.support.constraint.ConstraintLayout>
 
 
