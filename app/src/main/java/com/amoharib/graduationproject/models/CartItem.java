@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 public class CartItem implements Serializable {
     private Food food;
+    private MarketItem marketItem;
     private int quantity;
     private String customOrder;
     private Size size;
@@ -22,6 +23,21 @@ public class CartItem implements Serializable {
         this.size = size;
     }
 
+    public MarketItem getMarketItem() {
+        return marketItem;
+    }
+
+    public void setMarketItem(MarketItem marketItem) {
+        this.marketItem = marketItem;
+    }
+
+    public CartItem(MarketItem marketItem, int quantity, String customOrder, Size size) {
+        this.marketItem = marketItem;
+        this.quantity = quantity;
+        this.customOrder = customOrder;
+
+        this.size = size;
+    }
     public Food getFood() {
         return food;
     }

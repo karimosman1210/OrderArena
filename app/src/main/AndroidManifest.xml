@@ -109,7 +109,9 @@
         <activity
             android:name=".hypermarket.activities.HyperMarketActivity"
             android:label="@string/title_activity_hyper_market" />
-        <activity android:name=".hypermarket.activities.MenuHyperMarketActivity"></activity>
+        <activity android:name=".hypermarket.activities.MenuHyperMarketActivity" />
+        <activity android:name=".hypermarket.activities.MarketItemActivity" />
+        <activity android:name=".hypermarket.activities.OrderMarketActivity"></activity>
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 
 import com.amoharib.graduationproject.hypermarket.activities.HyperMarketActivity;
+import com.amoharib.graduationproject.hypermarket.activities.MenuHyperMarketActivity;
 import com.amoharib.graduationproject.models.HyperMarket;
 import com.amoharib.graduationproject.R;
 import com.amoharib.graduationproject.hypermarket.viewholders.HyperMarketViewHolder;
@@ -53,9 +54,9 @@ public class HyperMarketAdapter extends RecyclerView.Adapter<HyperMarketViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(fragment.getActivity(), MenuActivity.class);
-//                intent.putExtra("hypermarket", hyperMarket);
-//                fragment.startActivity(intent);
+                Intent intent = new Intent(fragment.getActivity(), MenuHyperMarketActivity.class);
+                intent.putExtra("hypermarket", hyperMarket);
+                fragment.startActivity(intent);
             }
         });
     }

@@ -10,6 +10,7 @@ import com.amoharib.graduationproject.interfaces.DataListeners;
 import com.amoharib.graduationproject.models.Address;
 import com.amoharib.graduationproject.models.CartItem;
 import com.amoharib.graduationproject.models.Food;
+import com.amoharib.graduationproject.models.MarketItem;
 import com.amoharib.graduationproject.models.Order;
 import com.amoharib.graduationproject.models.Restaurant;
 import com.amoharib.graduationproject.models.HyperMarket;
@@ -51,7 +52,9 @@ public class DataService {
     private DatabaseReference hypermarketDB = db.child("hyper-markets");
     private DatabaseReference usersDB = db.child("users");
     private DatabaseReference categoryDB = db.child("category");
+    private DatabaseReference categoryMarketDB = db.child("category-market");
     private DatabaseReference menuDB = db.child("menu");
+    private DatabaseReference menuMarketDB = db.child("menu-market");
 
 
     private static final DataService ourInstance = new DataService();
@@ -188,6 +191,7 @@ public class DataService {
             }
         });
     }
+
     public void getAllHyperMarket(final DataListeners.OnHyperMarketsListener onHyperMarketsListener) {
 
         final ArrayList<HyperMarket> hypermarkets = new ArrayList<>();
@@ -207,6 +211,7 @@ public class DataService {
             }
         });
     }
+
     public void getUsersOrders(String uid, final DataListeners.OnOrderListener onOrderListener) {
 
         userOrdersDB.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -427,10 +432,43 @@ public class DataService {
 
             @Override
             public void onCategoriesNotFound() {
-
             }
         });
     }
+
+    public void getMenuForMarketId(final String marketid, final DataListeners.OnMenuMarketListener onMenuMarketListener) {
+        getCategoriesForHyperMarket(marketid, new DataListeners.OnCategoryMarketListener() {
+            @Override
+            public void onCategoriesRetrieved(ArrayList<String> categories) {
+                for (final String category : categories) {
+                    menuMarketDB.child(marketid).child(category).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            ArrayList<MarketItem> marketItems = new ArrayList<>();
+
+                            for (DataSnapshot markets : dataSnapshot.getChildren()) {
+                                marketItems.add(markets.getValue(MarketItem.class));
+                            }
+
+                            onMenuMarketListener.onMenuMarketRetrieved(marketItems, category);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCategoriesNotFound() {
+
+            }
+        });
+
+    }
+
 
     public void deleteMenuItemForRestaurant(String restId, String category, String itemId, final DataListeners.DataListener dataListener) {
         menuDB.child(restId).child(category).child(itemId).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -451,6 +489,25 @@ public class DataService {
                     categories.add(category);
                 }
                 onCategoryListener.onCategoriesRetrieved(categories);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void getCategoriesForHyperMarket(String marketId, final DataListeners.OnCategoryMarketListener onCategoryMarketListener) {
+        categoryMarketDB.child(marketId).orderByValue().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> categories = new ArrayList<>();
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    String category = child.getKey();
+                    categories.add(category);
+                }
+                onCategoryMarketListener.onCategoriesRetrieved(categories);
             }
 
             @Override

@@ -2,6 +2,7 @@ package com.amoharib.graduationproject.interfaces;
 
 import com.amoharib.graduationproject.models.Address;
 import com.amoharib.graduationproject.models.Food;
+import com.amoharib.graduationproject.models.MarketItem;
 import com.amoharib.graduationproject.models.Order;
 import com.amoharib.graduationproject.models.Restaurant;
 import com.amoharib.graduationproject.models.HyperMarket;
@@ -48,6 +49,7 @@ public abstract class DataListeners {
     public interface OnRestaurantsListener {
         public void onDataRetrieved(ArrayList<Restaurant> restaurants);
     }
+
     public interface OnHyperMarketsListener {
         public void onDataRetrieved(ArrayList<HyperMarket> hypermarket);
     }
@@ -88,8 +90,23 @@ public abstract class DataListeners {
         public void onMenuRetrieved(ArrayList<Food> foods, String category);
     }
 
+    public interface OnMenuMarketListener {
+        public void onMenuMarketRetrieved(ArrayList<MarketItem> marketItems, String category);
+
+    }
+
     public interface OnCategoryListener {
         public void onCategoriesRetrieved(ArrayList<String> categories);
+
         public void onCategoriesNotFound();
+    }
+
+    public interface OnCategoryMarketListener{
+
+        public void onCategoriesRetrieved(ArrayList<String> categories);
+
+        public void onCategoriesNotFound();
+
+
     }
 }
