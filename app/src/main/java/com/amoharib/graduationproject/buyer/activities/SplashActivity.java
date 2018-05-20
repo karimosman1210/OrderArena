@@ -2,22 +2,18 @@ package com.amoharib.graduationproject.buyer.activities;
 
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.hardware.display.VirtualDisplay;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.amoharib.graduationproject.R;
 import com.amoharib.graduationproject.seller.activities.SellerDashboardActivity;
-import com.amoharib.graduationproject.seller.activities.SellerLoginActivity;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,6 +30,7 @@ public class SplashActivity extends AppCompatActivity {
     private ImageView cartLogo;
     private ImageView textBar;
     private ImageView slogan;
+    private LottieAnimationView lottieAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +53,7 @@ public class SplashActivity extends AppCompatActivity {
         final Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         final Animation fadeInAnimation2 = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         final Animation fadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
-        fadeInAnimation.setDuration(1000);
+        fadeInAnimation.setDuration(1300);
         fadeInAnimation2.setDuration(2000);
         slideUpAnimation.setDuration(1000);
 
@@ -79,14 +76,14 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                slideDownAnimation.setDuration(1500);
+                slideDownAnimation.setDuration(1200);
                 slogan.startAnimation(slideDownAnimation);
                 slogan.setVisibility(View.VISIBLE);
                 slideDownAnimation.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
-                        progressLoader.startAnimation(AnimationUtils.loadAnimation(SplashActivity.this, R.anim.fade_in));
-                        progressLoader.setVisibility(View.VISIBLE);
+                        //progressLoader.startAnimation(AnimationUtils.loadAnimation(SplashActivity.this, R.anim.fade_in));
+                        //progressLoader.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -163,6 +160,9 @@ public class SplashActivity extends AppCompatActivity {
         slogan = (ImageView) findViewById(R.id.slogan);
 
         progressLoader.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.splashAccentColor), PorterDuff.Mode.SRC_IN);
+        lottieAnimation = (LottieAnimationView) findViewById(R.id.lottie_animation);
+
+
     }
 
 //    private void initTextAnimation() {
