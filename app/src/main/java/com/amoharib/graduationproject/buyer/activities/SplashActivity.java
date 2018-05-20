@@ -43,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-    }
+}
 
     private void initAnimations() {
         Animation slideInAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_in);

@@ -1,5 +1,6 @@
 package com.amoharib.graduationproject.buyer.adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.amoharib.graduationproject.buyer.activities.OrderActivity;
+import com.amoharib.graduationproject.hypermarket.activities.OrderMarketActivity;
 import com.amoharib.graduationproject.models.CartItem;
 import com.amoharib.graduationproject.R;
 import com.amoharib.graduationproject.buyer.viewholders.OrderViewHolder;
@@ -20,9 +22,9 @@ import java.util.ArrayList;
 public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
 
     private ArrayList<CartItem> cartItems;
-    private OrderActivity activity;
+    private Context activity;
 
-    public OrderAdapter(ArrayList<CartItem> cartItems, OrderActivity activity) {
+    public OrderAdapter(ArrayList<CartItem> cartItems, Context activity) {
         this.cartItems = cartItems;
         this.activity = activity;
     }
@@ -39,29 +41,54 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
         final CartItem cartItem = cartItems.get(position);
         holder.updateUI(cartItem);
 
-        holder.incQuantityBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.incQuantity(holder.getAdapterPosition());
+        if (activity instanceof OrderActivity) {
 
-                if (!holder.decQuantityBtn.isEnabled()) holder.decQuantityBtn.setEnabled(true);
-                notifyItemChanged(holder.getAdapterPosition());
-            }
-        });
-
-        holder.decQuantityBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (cartItem.getQuantity() > 1) {
-                    activity.decQuantity(holder.getAdapterPosition());
+            holder.incQuantityBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((OrderActivity) activity).incQuantity(holder.getAdapterPosition());
+                    if (!holder.decQuantityBtn.isEnabled()) holder.decQuantityBtn.setEnabled(true);
+                    notifyItemChanged(holder.getAdapterPosition());
                 }
-                if (cartItem.getQuantity() == 1) {
-                    holder.decQuantityBtn.setEnabled(false);
-                }
-                notifyItemChanged(holder.getAdapterPosition());
+            });
 
-            }
-        });
+            holder.decQuantityBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (cartItem.getQuantity() > 1) {
+                        ((OrderActivity) activity).decQuantity(holder.getAdapterPosition());
+                    }
+                    if (cartItem.getQuantity() == 1) {
+                        holder.decQuantityBtn.setEnabled(false);
+                    }
+                    notifyItemChanged(holder.getAdapterPosition());
+
+                }
+            });
+        } else if (activity instanceof OrderMarketActivity) {
+            holder.incQuantityBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((OrderMarketActivity) activity).incQuantity(holder.getAdapterPosition());
+                    if (!holder.decQuantityBtn.isEnabled()) holder.decQuantityBtn.setEnabled(true);
+                    notifyItemChanged(holder.getAdapterPosition());
+                }
+            });
+
+            holder.decQuantityBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (cartItem.getQuantity() > 1) {
+                        ((OrderMarketActivity) activity).decQuantity(holder.getAdapterPosition());
+                    }
+                    if (cartItem.getQuantity() == 1) {
+                        holder.decQuantityBtn.setEnabled(false);
+                    }
+                    notifyItemChanged(holder.getAdapterPosition());
+
+                }
+            });
+        }
     }
 
     @Override
