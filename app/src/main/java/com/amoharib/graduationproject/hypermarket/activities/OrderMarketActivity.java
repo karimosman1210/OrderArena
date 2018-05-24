@@ -24,7 +24,7 @@ public class OrderMarketActivity extends AppCompatActivity {
     private RecyclerView recyclerOrder_market;
     private Button checkoutBtn_market;
     private Toolbar orderToolbar_market;
-    private OrderAdapter orderAdapter;
+    private OrderAdapter orderMarketAdapter;
 
     private ArrayList<CartItem> cartItems = MenuHyperMarketActivity.cartItems;
 
@@ -35,8 +35,8 @@ public class OrderMarketActivity extends AppCompatActivity {
 
         initView();
 
-        orderAdapter = new OrderAdapter(cartItems, this);
-        recyclerOrder_market.setAdapter(orderAdapter);
+        orderMarketAdapter = new OrderAdapter(cartItems, this);
+        recyclerOrder_market.setAdapter(orderMarketAdapter);
 
         calculateTotal();
     }
@@ -69,7 +69,7 @@ public class OrderMarketActivity extends AppCompatActivity {
         checkoutBtn_market.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  startActivity(new Intent(com.amoharib.graduationproject.hypermarket.activities.OrderMarketActivity.this, AddressSelectionActivity.class));
+                startActivity(new Intent(com.amoharib.graduationproject.hypermarket.activities.OrderMarketActivity.this, AddressSelectionActivity.class));
             }
         });
     }

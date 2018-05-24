@@ -1,24 +1,19 @@
-package com.amoharib.graduationproject.buyer.viewholders;
+package com.amoharib.graduationproject.hypermarket.viewholders;
 
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.amoharib.graduationproject.buyer.adapters.OrderAdapter;
-import com.amoharib.graduationproject.models.CartItem;
 import com.amoharib.graduationproject.R;
+import com.amoharib.graduationproject.models.CartItem;
 
-/**
- * Created by AMoharib on 2018-03-12.
- */
-
-public class OrderViewHolder extends RecyclerView.ViewHolder {
+public class OrderMarketViewHolder extends RecyclerView.ViewHolder {
 
     private TextView quantity, foodName, foodCustomOrder, subTotalPrice;
     public AppCompatImageButton incQuantityBtn, decQuantityBtn;
 
-    public OrderViewHolder(View itemView) {
+    public OrderMarketViewHolder(View itemView) {
         super(itemView);
         quantity = itemView.findViewById(R.id.quantityText);
         foodName = itemView.findViewById(R.id.foodName);
@@ -29,16 +24,9 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void updateUI(CartItem cartItem, int orderType) {
+    public void updateUI(CartItem cartItem) {
         quantity.setText(String.valueOf(cartItem.getQuantity()));
-        switch (orderType) {
-            case OrderAdapter.MARKET:
-                foodName.setText(cartItem.getMarketItem().getName());
-                break;
-            case OrderAdapter.RESTAURANT:
-                foodName.setText(cartItem.getFood().getName());
-                break;
-        }
+        foodName.setText(cartItem.getMarketItem().getName());
         foodCustomOrder.setText(cartItem.getCustomOrder());
         //subTotalPrice.setText(String.valueOf(cartItem.getQuantity() * Float.parseFloat(cartItem.getFood().getPrice())));
 

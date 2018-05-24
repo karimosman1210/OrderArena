@@ -21,6 +21,8 @@ import java.util.ArrayList;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
 
+    public static final int RESTAURANT = 0, MARKET = 1;
+
     private ArrayList<CartItem> cartItems;
     private Context activity;
 
@@ -39,9 +41,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final OrderViewHolder holder, int position) {
         final CartItem cartItem = cartItems.get(position);
-        holder.updateUI(cartItem);
 
         if (activity instanceof OrderActivity) {
+            holder.updateUI(cartItem, RESTAURANT);
 
             holder.incQuantityBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -66,6 +68,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
                 }
             });
         } else if (activity instanceof OrderMarketActivity) {
+            holder.updateUI(cartItem, MARKET);
+
             holder.incQuantityBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -78,6 +82,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
             holder.decQuantityBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     if (cartItem.getQuantity() > 1) {
                         ((OrderMarketActivity) activity).decQuantity(holder.getAdapterPosition());
                     }

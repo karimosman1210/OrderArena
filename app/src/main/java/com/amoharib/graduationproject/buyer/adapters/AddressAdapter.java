@@ -8,8 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.amoharib.graduationproject.buyer.activities.AddressSelectionActivity;
 import com.amoharib.graduationproject.buyer.activities.EditAddressActivity;
 import com.amoharib.graduationproject.buyer.activities.PaymentActivity;
+import com.amoharib.graduationproject.hypermarket.activities.AddressSelectionMarketActivity;
+import com.amoharib.graduationproject.hypermarket.activities.PaymentMarketActivity;
 import com.amoharib.graduationproject.interfaces.DataListeners;
 import com.amoharib.graduationproject.models.Address;
 import com.amoharib.graduationproject.R;
@@ -59,13 +62,27 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressViewHolder> impl
             }
         });
 
+        if (activity instanceof AddressSelectionActivity) {
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.startActivity(new Intent(activity, PaymentActivity.class).putExtra("address",address));
-            }
-        });
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.startActivity(new Intent(activity, PaymentActivity.class).putExtra("address", address));
+                }
+            });
+        }
+        if (activity instanceof AddressSelectionMarketActivity){
+
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.startActivity(new Intent(activity, PaymentMarketActivity.class).putExtra("address", address));
+                }
+            });
+        }
+
     }
 
     @Override

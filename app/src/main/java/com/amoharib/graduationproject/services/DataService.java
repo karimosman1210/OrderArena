@@ -48,6 +48,10 @@ public class DataService {
     private DatabaseReference orderDB = db.child("order");
     private DatabaseReference userOrdersDB = db.child("user-order");
     private DatabaseReference restOrderDB = db.child("rest-order");
+
+    private DatabaseReference orderMarketDB = db.child("order-market");
+    private DatabaseReference userOrdersMarketDB = db.child("user-order-market");
+    private DatabaseReference restOrderMarketDB = db.child("rest-order-market");
     private DatabaseReference restDB = db.child("restaurants");
     private DatabaseReference hypermarketDB = db.child("hyper-markets");
     private DatabaseReference usersDB = db.child("users");
@@ -139,6 +143,31 @@ public class DataService {
 
     }
 
+    public void addMarketOrder(final String restId, final String uid, final String addressID, final ArrayList<CartItem> items, final DataListeners.OnOrderAdditionListener onOrderAdditionListener) {
+
+        DataService.getInstance().getCurrentTime(new DataListeners.CurrentTimeListener() {
+            @Override
+            public void onTimeReceived(long timestamp) {
+                final DatabaseReference tempDB = orderMarketDB.push();
+
+                Order order = new Order(tempDB.getKey(), restId, uid, addressID, items, timestamp);
+                tempDB.setValue(order).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        onOrderAdditionListener.onOrderAdded(tempDB.getKey(), task.isSuccessful());
+                        if (task.isSuccessful()) {
+                            userOrdersMarketDB.child(uid).child(tempDB.getKey()).setValue(false);
+                            restOrderMarketDB.child(restId).child(tempDB.getKey()).setValue(false);
+                        }
+                    }
+                });
+            }
+        });
+
+
+    }
+
+
     public void getRestaurant(String restId, final DataListeners.RestaurantListener retrieveDataListener) {
         restDB.child(restId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -155,9 +184,43 @@ public class DataService {
         });
     }
 
+    public void getMarket(String restId, final DataListeners.RestaurantListener retrieveDataListener) {
+        hypermarketDB.child(restId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Restaurant restaurant = dataSnapshot.getValue(Restaurant.class);
+                retrieveDataListener.onRestaurantRetrieved(restaurant);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                retrieveDataListener.onRestaurantRetrieved(null);
+
+            }
+        });
+    }
+
+
     public void addOnOrderStatusChanged(String orderId, final DataListeners.OrderStatusListener orderStatusListener) {
 
         orderDB.child(orderId).child("status").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                OrderStatus status = dataSnapshot.getValue(OrderStatus.class);
+                orderStatusListener.onStatusChanged(status);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void addOnOrderMarketStatusChanged(String orderId, final DataListeners.OrderStatusListener orderStatusListener) {
+
+        orderMarketDB.child(orderId).child("status").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 OrderStatus status = dataSnapshot.getValue(OrderStatus.class);
@@ -246,6 +309,45 @@ public class DataService {
             }
         });
     }
+
+
+
+
+    public void getUsersOrdersMarket(String uid, final DataListeners.OnOrderListener onOrderListener) {
+
+        userOrdersMarketDB.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    final ArrayList<Order> orders = new ArrayList<>();
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        String orderId = child.getKey();
+                        orderMarketDB.child(orderId).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                Order order = dataSnapshot.getValue(Order.class);
+                                orders.add(order);
+                                onOrderListener.onDataReceived(orders);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                } else {
+                    onOrderListener.onDataReceived(null);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     public void getRestaurantOrders(String uid, final DataListeners.OnOrderListener onOrderListener) {
 

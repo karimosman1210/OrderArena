@@ -42,13 +42,20 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+
+
         <activity
             android:name=".buyer.activities.NewAddressActivity"
             android:parentActivityName=".buyer.activities.AddressSelectionActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".buyer.activities.AddressSelectionActivity" />
+
         </activity>
+
+
+
+
         <activity
             android:name=".buyer.activities.EditAddressActivity"
             android:parentActivityName=".buyer.activities.AddressSelectionActivity">
@@ -111,7 +118,10 @@
             android:label="@string/title_activity_hyper_market" />
         <activity android:name=".hypermarket.activities.MenuHyperMarketActivity" />
         <activity android:name=".hypermarket.activities.MarketItemActivity" />
-        <activity android:name=".hypermarket.activities.OrderMarketActivity"></activity>
+        <activity android:name=".hypermarket.activities.OrderMarketActivity" />
+        <activity android:name=".hypermarket.activities.AddressSelectionMarketActivity" />
+        <activity android:name=".hypermarket.activities.PaymentMarketActivity" />
+        <activity android:name=".hypermarket.activities.TrackOrderMarketActivity"></activity>
     </application>
 
 </manifest>

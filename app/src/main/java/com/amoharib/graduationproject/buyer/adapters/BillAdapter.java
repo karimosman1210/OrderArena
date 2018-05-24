@@ -9,6 +9,8 @@ import com.amoharib.graduationproject.models.CartItem;
 import com.amoharib.graduationproject.R;
 import com.amoharib.graduationproject.buyer.viewholders.BillViewHolder;
 
+
+
 import java.util.ArrayList;
 
 public class BillAdapter extends RecyclerView.Adapter<BillViewHolder> {
