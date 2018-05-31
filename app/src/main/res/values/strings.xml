@@ -18,20 +18,15 @@
     <string name="bill">Bill</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="orders">Orders</string>
     <string name="profile">Profile</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="browse_restaurants">Browse Restaurants</string>
     <string name="order_from_the_best_restaurants_get_your_food_delivered_faster">Order from the best restaurants, get your food delivered faster.</string>
     <string name="no_orders_found">No Orders Found</string>
     <string name="view_details">View Details</string>
     <string name="logout">LogOut</string>
     <string name="restaurant_name">Restaurant Name</string>
-    <string name="choose_your_background">BACKGROUND</string>
     <string name="choose_your_logo">LOGO</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -42,10 +37,6 @@
     <string name="title_activity_seller_dashboard">SellerActivityDashboard</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
     <string name="order_details">Order Details</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
@@ -78,7 +69,6 @@
 
 
     <string name="default_notification_channel_id">my_channel_01</string>
-    <string name="title_activity_main__hyper__market">MainActivity_Hyper_Market</string>
     <string name="title_activity_hyper_market">HyperMarketActivity</string>
 
 </resources>

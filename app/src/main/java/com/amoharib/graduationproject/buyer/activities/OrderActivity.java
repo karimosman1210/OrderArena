@@ -8,12 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-
 import com.amoharib.graduationproject.buyer.adapters.OrderAdapter;
 import com.amoharib.graduationproject.models.CartItem;
 import com.amoharib.graduationproject.R;
-
 import java.util.ArrayList;
+
 
 public class OrderActivity extends AppCompatActivity {
 

@@ -46,9 +46,15 @@ public abstract class DataListeners {
         public void onRestaurantRetrieved(Restaurant restaurant);
     }
 
+
+    public interface HyperMarketListener {
+        public void onHyperMarketRetrieved(HyperMarket hyperMarket);
+    }
+
     public interface OnRestaurantsListener {
         public void onDataRetrieved(ArrayList<Restaurant> restaurants);
     }
+
 
     public interface OnHyperMarketsListener {
         public void onDataRetrieved(ArrayList<HyperMarket> hypermarket);

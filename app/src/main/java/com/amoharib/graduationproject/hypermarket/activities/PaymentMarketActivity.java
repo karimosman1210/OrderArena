@@ -87,7 +87,7 @@ public class PaymentMarketActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_payment_market);
+        setContentView(R.layout.activity_payment);
         address = getIntent().getParcelableExtra("address");
 
         initView();
@@ -109,15 +109,15 @@ public class PaymentMarketActivity extends AppCompatActivity {
     }
 
     private void proceedToCheckout() {
-        final String restId = MenuActivity.restaurantID;
+        final String restId = MenuHyperMarketActivity.hypermarketID;
 
 
-        DataService.getInstance().addMarketOrder(restId, FirebaseAuth.getInstance().getCurrentUser().getUid(), address.getId(), MenuActivity.cartItems, new DataListeners.OnOrderAdditionListener() {
+        DataService.getInstance().addMarketOrder(restId, FirebaseAuth.getInstance().getCurrentUser().getUid(), address.getId(), MenuHyperMarketActivity.cartItems, new DataListeners.OnOrderAdditionListener() {
             @Override
             public void onOrderAdded(String orderId, boolean status) {
 
-                startActivity(new Intent(com.amoharib.graduationproject.hypermarket.activities.PaymentMarketActivity.this, TrackOrderActivity.class)
-                        .putExtra("hypermarketorder", restId)
+                startActivity(new Intent(com.amoharib.graduationproject.hypermarket.activities.PaymentMarketActivity.this, TrackOrderMarketActivity.class)
+                        .putExtra("hypermarket", restId)
                         .putExtra("orderMarketId", orderId)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
                 );
@@ -137,7 +137,7 @@ public class PaymentMarketActivity extends AppCompatActivity {
         DecimalFormat decimalFormat = new DecimalFormat();
         decimalFormat.setMaximumFractionDigits(2);
         Double totalPrice = 0d;
-        for (CartItem item : MenuActivity.cartItems) {
+        for (CartItem item : MenuHyperMarketActivity.cartItems) {
             totalPrice += item.getQuantity() * item.getSize().getPrice();
         }
 
@@ -146,7 +146,7 @@ public class PaymentMarketActivity extends AppCompatActivity {
         billRecycler.setLayoutManager(new LinearLayoutManager(this));
         billRecycler.setNestedScrollingEnabled(false);
 
-        BillAdapter adapter = new BillAdapter(MenuActivity.cartItems);
+        BillAdapter adapter = new BillAdapter(MenuHyperMarketActivity.cartItems,1);
         billRecycler.setAdapter(adapter);
     }
 

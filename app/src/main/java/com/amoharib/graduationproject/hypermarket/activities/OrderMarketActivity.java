@@ -69,7 +69,7 @@ public class OrderMarketActivity extends AppCompatActivity {
         checkoutBtn_market.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(com.amoharib.graduationproject.hypermarket.activities.OrderMarketActivity.this, AddressSelectionActivity.class));
+                startActivity(new Intent(com.amoharib.graduationproject.hypermarket.activities.OrderMarketActivity.this, AddressSelectionMarketActivity.class));
             }
         });
     }

@@ -111,7 +111,7 @@ public class PaymentActivity extends AppCompatActivity {
         billRecycler.setLayoutManager(new LinearLayoutManager(this));
         billRecycler.setNestedScrollingEnabled(false);
 
-        BillAdapter adapter = new BillAdapter(MenuActivity.cartItems);
+        BillAdapter adapter = new BillAdapter(MenuActivity.cartItems,0);
         billRecycler.setAdapter(adapter);
     }
 

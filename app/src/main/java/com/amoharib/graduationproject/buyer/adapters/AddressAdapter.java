@@ -72,7 +72,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressViewHolder> impl
                 }
             });
         }
-        if (activity instanceof AddressSelectionMarketActivity){
+        else if (activity instanceof AddressSelectionMarketActivity){
 
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 
 import com.amoharib.graduationproject.R;
 import com.amoharib.graduationproject.buyer.adapters.UserOrderAdapter;
+import com.amoharib.graduationproject.hypermarket.adapters.UserOrderMarketAdapter;
 import com.amoharib.graduationproject.interfaces.DataListeners;
 import com.amoharib.graduationproject.models.Order;
 import com.amoharib.graduationproject.services.DataService;
@@ -52,7 +53,7 @@ public class HyperMarketOrdersFragment extends Fragment {
     private RecyclerView ordersRecycler;
     private ProgressBar progressBar;
     private ArrayList<Order> mOrders;
-    private UserOrderAdapter userOrderAdapter;
+    private UserOrderMarketAdapter userOrderAdapter;
 
     public HyperMarketOrdersFragment() {
         // Required empty public constructor
@@ -70,7 +71,7 @@ public class HyperMarketOrdersFragment extends Fragment {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         mOrders = new ArrayList<>();
-        userOrderAdapter = new UserOrderAdapter(mOrders);
+        userOrderAdapter = new UserOrderMarketAdapter(mOrders);
 
         ordersRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         ordersRecycler.setAdapter(userOrderAdapter);

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.amoharib.graduationproject.R;
 import com.amoharib.graduationproject.buyer.activities.MainActivity;
 import com.amoharib.graduationproject.interfaces.DataListeners;
+import com.amoharib.graduationproject.models.HyperMarket;
 import com.amoharib.graduationproject.models.Restaurant;
 import com.amoharib.graduationproject.services.DataService;
 import com.amoharib.graduationproject.utils.OrderStatus;
@@ -52,7 +53,7 @@ import java.util.Locale;
             private TextView timerText;
             private String restaurantId;
             private String orderId;
-            private Restaurant rest;
+            private HyperMarket rest;
             private SimpleDateFormat timeFormat = new SimpleDateFormat("mm:ss", Locale.ENGLISH);
 
             @Override
@@ -66,9 +67,9 @@ import java.util.Locale;
 
                 initView();
 
-                DataService.getInstance().getMarket(restaurantId, new DataListeners.RestaurantListener() {
+                DataService.getInstance().getMarket(restaurantId, new DataListeners.HyperMarketListener(){
                     @Override
-                    public void onRestaurantRetrieved(Restaurant restaurant) {
+                    public void onHyperMarketRetrieved(HyperMarket restaurant) {
                         if (restaurant != null) {
                             rest = restaurant;
                             initCustomViews();
@@ -159,7 +160,7 @@ import java.util.Locale;
 
             @Override
             public void onBackPressed() {
-                startActivity(new Intent(this, MainActivity.class)
+                startActivity(new Intent(this, HyperMarketActivity.class)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
                 );
                 finish();

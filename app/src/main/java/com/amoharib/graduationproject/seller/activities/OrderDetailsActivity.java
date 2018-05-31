@@ -73,7 +73,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
     }
 
     private void populateOrderList() {
-        adapter = new BillAdapter(order.getItems());
+        adapter = new BillAdapter(order.getItems(),0);
         billRecycler.setLayoutManager(new LinearLayoutManager(this));
         billRecycler.setAdapter(adapter);
     }

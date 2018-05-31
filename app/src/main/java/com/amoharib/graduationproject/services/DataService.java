@@ -184,17 +184,17 @@ public class DataService {
         });
     }
 
-    public void getMarket(String restId, final DataListeners.RestaurantListener retrieveDataListener) {
+    public void getMarket(String restId, final DataListeners.HyperMarketListener retrieveDataListener) {
         hypermarketDB.child(restId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Restaurant restaurant = dataSnapshot.getValue(Restaurant.class);
-                retrieveDataListener.onRestaurantRetrieved(restaurant);
+                HyperMarket restaurant = dataSnapshot.getValue(HyperMarket.class);
+                retrieveDataListener.onHyperMarketRetrieved(restaurant);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                retrieveDataListener.onRestaurantRetrieved(null);
+                retrieveDataListener.onHyperMarketRetrieved(null);
 
             }
         });

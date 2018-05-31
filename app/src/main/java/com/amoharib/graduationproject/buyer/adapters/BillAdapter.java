@@ -1,5 +1,6 @@
 package com.amoharib.graduationproject.buyer.adapters;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +16,11 @@ import java.util.ArrayList;
 
 public class BillAdapter extends RecyclerView.Adapter<BillViewHolder> {
     private ArrayList<CartItem> items;
+private int nActivity;
 
-    public BillAdapter(ArrayList<CartItem> items) {
+    public BillAdapter(ArrayList<CartItem> items, int nActivity) {
         this.items = items;
+    this.nActivity=nActivity;
     }
 
     @Override
@@ -29,7 +32,18 @@ public class BillAdapter extends RecyclerView.Adapter<BillViewHolder> {
     @Override
     public void onBindViewHolder(BillViewHolder holder, int position) {
         CartItem item = items.get(position);
-        holder.updateUI(item);
+
+
+        if(nActivity ==1 ){
+
+            holder.updateUI_market(item);
+
+        }
+        if (nActivity ==0){
+
+            holder.updateUI(item);
+
+        }
     }
 
     @Override
