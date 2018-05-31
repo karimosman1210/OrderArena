@@ -102,7 +102,7 @@ public class PaymentActivity extends AppCompatActivity {
         DecimalFormat decimalFormat = new DecimalFormat();
         decimalFormat.setMaximumFractionDigits(2);
         Double totalPrice = 0d;
-        for (CartItem item : MenuHyperMarketActivity.cartItems) {
+        for (CartItem item : MenuActivity.cartItems) {
             totalPrice += item.getQuantity() * item.getSize().getPrice();
         }
 

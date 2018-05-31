@@ -38,7 +38,7 @@ public class TrackOrderActivity extends AppCompatActivity implements DataListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_order);
-        restaurantId = getIntent().getStringExtra("hypermarketorder");
+        restaurantId = getIntent().getStringExtra("restaurant");
         orderId = getIntent().getStringExtra("orderId");
 
         initView();
