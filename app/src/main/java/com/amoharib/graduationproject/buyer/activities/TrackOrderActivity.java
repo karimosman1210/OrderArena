@@ -174,8 +174,6 @@ public class TrackOrderActivity extends AppCompatActivity implements DataListene
 //        mMap.setMinZoomPreference(2.0f);
         getDriverLocation();
         enableCurrentLocation();
-
-
     }
 
     private void enableCurrentLocation() {
