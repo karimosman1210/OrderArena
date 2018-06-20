@@ -4,6 +4,20 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/selectAddressFromMap"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp"
+        android:background="@drawable/splash_btn_bg"
+        android:drawablePadding="4dp"
+        android:drawableStart="@drawable/ic_my_location_black_24dp"
+        android:fontFamily="@font/varela_round"
+        android:text="select from map"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/small_size" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -155,8 +155,8 @@ public class MenuHyperMarketActivity extends AppCompatActivity {
     }
 
     private void addToCart(CartItem cartItem) {
-        System.out.println(cartItem.getMarketItem().getId());
         for (CartItem item : cartItems) {
+            System.out.println(cartItem.getMarketItem().getId() + " " + item.getMarketItem().getId());
             if (cartItem.getMarketItem().getId().equals(item.getMarketItem().getId()) && cartItem.getCustomOrder().equals(item.getCustomOrder())) {
                 item.setQuantity(cartItem.getQuantity() + item.getQuantity());
                 return;

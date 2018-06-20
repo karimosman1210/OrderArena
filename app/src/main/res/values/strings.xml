@@ -70,5 +70,9 @@
 
     <string name="default_notification_channel_id">my_channel_01</string>
     <string name="title_activity_hyper_market">HyperMarketActivity</string>
+    <string name="your_order_status_from">Your Order Status From</string>
+    <string name="sent">Sent</string>
+    <string name="seen">Seen</string>
+    <string name="on_the_way">On The Way</string>
 
 </resources>

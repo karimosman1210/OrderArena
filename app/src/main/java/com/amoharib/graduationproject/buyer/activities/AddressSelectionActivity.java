@@ -8,19 +8,16 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.amoharib.graduationproject.R;
 import com.amoharib.graduationproject.buyer.adapters.AddressAdapter;
 import com.amoharib.graduationproject.interfaces.DataListeners;
 import com.amoharib.graduationproject.models.Address;
-import com.amoharib.graduationproject.R;
 import com.amoharib.graduationproject.services.DataService;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 public class AddressSelectionActivity extends AppCompatActivity implements DataListeners.addAddressListener {
 
@@ -30,6 +27,7 @@ public class AddressSelectionActivity extends AppCompatActivity implements DataL
     public ArrayList<Address> addresses = new ArrayList<>();
     private AddressAdapter adapter;
     private Toolbar toolbar;
+    private Button selectAddressFromMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +53,20 @@ public class AddressSelectionActivity extends AppCompatActivity implements DataL
                 startActivity(new Intent(AddressSelectionActivity.this, NewAddressActivity.class));
             }
         });
+
+        selectAddressFromMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AddressSelectionActivity.this, MapsActivity.class));
+            }
+        });
     }
 
     private void initView() {
         addressRecycler = (RecyclerView) findViewById(R.id.addressRecycler);
         addNewAddressBtn = (Button) findViewById(R.id.add_new_address_btn);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        selectAddressFromMap = (Button) findViewById(R.id.selectAddressFromMap);
     }
 
     @Override

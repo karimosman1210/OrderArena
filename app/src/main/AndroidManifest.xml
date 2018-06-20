@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.amoharib.graduationproject">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -39,10 +40,12 @@
         <activity android:name=".buyer.activities.AddressSelectionActivity" />
 
         <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
-
 
         <activity
             android:name=".buyer.activities.NewAddressActivity"
@@ -50,12 +53,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".buyer.activities.AddressSelectionActivity" />
-
         </activity>
-
-
-
-
         <activity
             android:name=".buyer.activities.EditAddressActivity"
             android:parentActivityName=".buyer.activities.AddressSelectionActivity">
@@ -121,7 +119,8 @@
         <activity android:name=".hypermarket.activities.OrderMarketActivity" />
         <activity android:name=".hypermarket.activities.AddressSelectionMarketActivity" />
         <activity android:name=".hypermarket.activities.PaymentMarketActivity" />
-        <activity android:name=".hypermarket.activities.TrackOrderMarketActivity"></activity>
+        <activity android:name=".hypermarket.activities.TrackOrderMarketActivity" />
+        <activity android:name=".buyer.activities.MapsActivity"></activity>
     </application>
 
 </manifest>

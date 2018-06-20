@@ -35,9 +35,9 @@ public class CartItem implements Serializable {
         this.marketItem = marketItem;
         this.quantity = quantity;
         this.customOrder = customOrder;
-
         this.size = size;
     }
+
     public Food getFood() {
         return food;
     }

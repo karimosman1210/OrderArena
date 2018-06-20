@@ -1,9 +1,14 @@
 package com.amoharib.graduationproject.buyer.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -14,13 +19,28 @@ import com.amoharib.graduationproject.services.DataService;
 import com.amoharib.graduationproject.utils.OrderStatus;
 import com.amoharib.graduationproject.utils.VectorDrawableUtils;
 import com.dinuscxj.progressbar.CircleProgressBar;
+import com.firebase.geofire.GeoFire;
 import com.github.vipulasri.timelineview.TimelineView;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
-public class TrackOrderActivity extends AppCompatActivity implements DataListeners.OrderStatusListener {
+public class TrackOrderActivity extends AppCompatActivity implements DataListeners.OrderStatusListener, OnMapReadyCallback {
 
 
     private TextView restName;
@@ -33,6 +53,8 @@ public class TrackOrderActivity extends AppCompatActivity implements DataListene
     private String orderId;
     private Restaurant rest;
     private SimpleDateFormat timeFormat = new SimpleDateFormat("mm:ss", Locale.ENGLISH);
+
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +102,10 @@ public class TrackOrderActivity extends AppCompatActivity implements DataListene
                 }
             }
         });
+
+
+        SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        supportMapFragment.getMapAsync(this);
     }
 
     private void initCustomViews() {
@@ -139,6 +165,74 @@ public class TrackOrderActivity extends AppCompatActivity implements DataListene
         startActivity(new Intent(this, MainActivity.class)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
         );
-        finish();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        mMap = googleMap;
+//        mMap.setMinZoomPreference(2.0f);
+        getDriverLocation();
+        enableCurrentLocation();
+
+
+    }
+
+    private void enableCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 0) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                enableCurrentLocation();
+            }
+        }
+    }
+
+    Marker driverMarker;
+
+    boolean first = true;
+
+    private void getDriverLocation() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driver/0/current-location/l");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                double latitude = 0.0;
+                double longitude = 0.0;
+
+                if (driverMarker != null) driverMarker.remove();
+
+                List<Double> location = (List<Double>) dataSnapshot.getValue();
+
+                latitude = location.get(0);
+                longitude = location.get(1);
+
+                LatLng driverLocation = new LatLng(latitude, longitude);
+
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(driverLocation);
+                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_car));
+
+                driverMarker = mMap.addMarker(markerOptions);
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(driverLocation));
+                if (first) {
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+                    first = false;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
