@@ -1,9 +1,11 @@
 package com.amoharib.graduationproject.interfaces;
 
 import com.amoharib.graduationproject.models.Address;
+import com.amoharib.graduationproject.models.AllPharmacy;
 import com.amoharib.graduationproject.models.Food;
 import com.amoharib.graduationproject.models.MarketItem;
 import com.amoharib.graduationproject.models.Order;
+import com.amoharib.graduationproject.models.PharmacyItem;
 import com.amoharib.graduationproject.models.Restaurant;
 import com.amoharib.graduationproject.models.HyperMarket;
 import com.amoharib.graduationproject.models.User;
@@ -41,6 +43,10 @@ public abstract class DataListeners {
     public interface OrderStatusListener {
         public void onStatusChanged(OrderStatus status);
     }
+    public interface addCard{
+       public void setCount(int count);
+
+    }
 
     public interface RestaurantListener {
         public void onRestaurantRetrieved(Restaurant restaurant);
@@ -58,6 +64,11 @@ public abstract class DataListeners {
 
     public interface OnHyperMarketsListener {
         public void onDataRetrieved(ArrayList<HyperMarket> hypermarket);
+    }
+
+    public interface OnPharmacyListener{
+       public void onDatretreved(ArrayList<AllPharmacy>allPharmacies);
+
     }
 
     public interface OnOrderListener {
@@ -100,6 +111,10 @@ public abstract class DataListeners {
         public void onMenuMarketRetrieved(ArrayList<MarketItem> marketItems, String category);
 
     }
+    public interface OnMenuPharmacyListener{
+        public void onMenuPharmacyRetrieved(ArrayList<PharmacyItem> pharmacyItems,String category);
+
+    }
 
     public interface OnCategoryListener {
         public void onCategoriesRetrieved(ArrayList<String> categories);
@@ -108,6 +123,15 @@ public abstract class DataListeners {
     }
 
     public interface OnCategoryMarketListener{
+
+        public void onCategoriesRetrieved(ArrayList<String> categories);
+
+        public void onCategoriesNotFound();
+
+
+    }
+
+    public interface OnCategoryPharmacyListener{
 
         public void onCategoriesRetrieved(ArrayList<String> categories);
 

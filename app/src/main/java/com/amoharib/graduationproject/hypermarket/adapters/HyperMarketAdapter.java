@@ -18,9 +18,6 @@ import com.amoharib.graduationproject.hypermarket.viewholders.HyperMarketViewHol
 
 import java.util.ArrayList;
 
-/**
- * Created by Abdel Rahman on 18-May-18.
- */
 
 public class HyperMarketAdapter extends RecyclerView.Adapter<HyperMarketViewHolder> implements Filterable {
 

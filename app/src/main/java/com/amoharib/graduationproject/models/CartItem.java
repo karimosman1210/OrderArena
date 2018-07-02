@@ -2,9 +2,7 @@ package com.amoharib.graduationproject.models;
 
 import java.io.Serializable;
 
-/**
- * Created by AMoharib on 2018-03-12.
- */
+
 
 public class CartItem implements Serializable {
     private Food food;
@@ -12,6 +10,7 @@ public class CartItem implements Serializable {
     private int quantity;
     private String customOrder;
     private Size size;
+    private PharmacyItem pharmacyItem;
 
     public CartItem() {
     }
@@ -22,6 +21,27 @@ public class CartItem implements Serializable {
         this.customOrder = customOrder;
         this.size = size;
     }
+    public CartItem(MarketItem marketItem, int quantity, String customOrder, Size size) {
+        this.marketItem = marketItem;
+        this.quantity = quantity;
+        this.customOrder = customOrder;
+
+        this.size = size;
+    }
+
+    public CartItem(int quantity, String customOrder, PharmacyItem pharmacyItem) {
+        this.quantity = quantity;
+        this.customOrder = customOrder;
+        this.pharmacyItem = pharmacyItem;
+    }
+
+    public PharmacyItem getPharmacyItem() {
+        return pharmacyItem;
+    }
+
+    public void setPharmacyItem(PharmacyItem pharmacyItem) {
+        this.pharmacyItem = pharmacyItem;
+    }
 
     public MarketItem getMarketItem() {
         return marketItem;
@@ -31,12 +51,6 @@ public class CartItem implements Serializable {
         this.marketItem = marketItem;
     }
 
-    public CartItem(MarketItem marketItem, int quantity, String customOrder, Size size) {
-        this.marketItem = marketItem;
-        this.quantity = quantity;
-        this.customOrder = customOrder;
-        this.size = size;
-    }
 
     public Food getFood() {
         return food;

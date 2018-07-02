@@ -107,7 +107,8 @@
         android:layout_gravity="end|bottom"
         android:tint="#fff"
         app:rippleColor="#898989"
-        android:clickable="true"/>
+        android:clickable="true"
+        tools:ignore="VectorDrawableCompat" />
 
 
 </android.support.design.widget.CoordinatorLayout>

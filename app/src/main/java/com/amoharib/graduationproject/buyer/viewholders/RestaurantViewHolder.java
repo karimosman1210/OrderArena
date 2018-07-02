@@ -9,9 +9,7 @@ import com.amoharib.graduationproject.models.Restaurant;
 import com.amoharib.graduationproject.R;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-/**
- * Created by AMoharib on 2018-03-09.
- */
+
 
 public class RestaurantViewHolder extends RecyclerView.ViewHolder {
     private TextView restaurantTitle;
@@ -30,5 +28,6 @@ public class RestaurantViewHolder extends RecyclerView.ViewHolder {
         restaurantTitle.setText(restaurant.getTitle());
         restaurantDesc.setText(restaurant.getDescription());
     }
+
 
 }

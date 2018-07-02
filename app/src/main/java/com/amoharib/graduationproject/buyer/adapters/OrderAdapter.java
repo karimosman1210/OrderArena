@@ -15,9 +15,7 @@ import com.amoharib.graduationproject.buyer.viewholders.OrderViewHolder;
 
 import java.util.ArrayList;
 
-/**
- * Created by AMoharib on 2018-03-12.
- */
+
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
 

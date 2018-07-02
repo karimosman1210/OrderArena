@@ -9,9 +9,7 @@ import com.amoharib.graduationproject.buyer.adapters.OrderAdapter;
 import com.amoharib.graduationproject.models.CartItem;
 import com.amoharib.graduationproject.R;
 
-/**
- * Created by AMoharib on 2018-03-12.
- */
+
 
 public class OrderViewHolder extends RecyclerView.ViewHolder {
 

@@ -17,9 +17,6 @@ import com.amoharib.graduationproject.buyer.viewholders.RestaurantViewHolder;
 
 import java.util.ArrayList;
 
-/**
- * Created by AMoharib on 2018-03-09.
- */
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantViewHolder> implements Filterable {
 

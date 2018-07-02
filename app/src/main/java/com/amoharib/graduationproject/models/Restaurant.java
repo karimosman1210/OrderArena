@@ -2,9 +2,7 @@ package com.amoharib.graduationproject.models;
 
 import java.io.Serializable;
 
-/**
- * Created by AMoharib on 2018-03-09.
- */
+
 
 public class Restaurant implements Serializable {
     private String title, description, logo, id, token;

@@ -17,9 +17,7 @@ import java.util.ArrayList;
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters;
 import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection;
 
-/**
- * Created by AMoharib on 2018-03-10.
- */
+
 
 public class MenuAdapter extends StatelessSection implements Filterable {
 

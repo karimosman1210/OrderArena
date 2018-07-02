@@ -9,9 +9,7 @@ import com.amoharib.graduationproject.models.Food;
 import com.amoharib.graduationproject.R;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-/**
- * Created by AMoharib on 2018-03-10.
- */
+
 
 public class FoodItemViewHolder extends RecyclerView.ViewHolder {
 

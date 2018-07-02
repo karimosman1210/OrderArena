@@ -9,9 +9,6 @@ import com.amoharib.graduationproject.models.Address;
 import com.amoharib.graduationproject.R;
 import com.amoharib.graduationproject.utils.StringUtils;
 
-/**
- * Created by AMoharib on 2018-03-27.
- */
 
 public class AddressViewHolder extends RecyclerView.ViewHolder {
     private TextView address;

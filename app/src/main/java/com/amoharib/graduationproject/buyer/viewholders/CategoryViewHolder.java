@@ -7,9 +7,6 @@ import android.widget.TextView;
 
 import com.amoharib.graduationproject.R;
 
-/**
- * Created by AMoharib on 2018-03-10.
- */
 
 public class CategoryViewHolder extends RecyclerView.ViewHolder {
 

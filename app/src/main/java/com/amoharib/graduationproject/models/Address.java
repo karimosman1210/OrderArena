@@ -3,9 +3,6 @@ package com.amoharib.graduationproject.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by AMoharib on 2018-03-26.
- */
 
 public class Address implements Parcelable {
     private String id;

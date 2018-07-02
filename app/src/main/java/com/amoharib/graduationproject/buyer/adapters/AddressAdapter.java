@@ -22,9 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-/**
- * Created by AMoharib on 2018-03-27.
- */
+
 
 public class AddressAdapter extends RecyclerView.Adapter<AddressViewHolder> implements DataListeners.addAddressListener {
 

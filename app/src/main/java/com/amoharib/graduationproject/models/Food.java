@@ -3,9 +3,7 @@ package com.amoharib.graduationproject.models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Created by AMoharib on 2018-03-10.
- */
+
 
 public class Food implements Serializable {
     private String id, name, description, icon;

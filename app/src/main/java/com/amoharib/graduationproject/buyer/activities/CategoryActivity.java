@@ -10,12 +10,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.amoharib.graduationproject.Pharmacy.Activities.MainPharmacy;
 import com.amoharib.graduationproject.R;
 import com.amoharib.graduationproject.hypermarket.activities.HyperMarketActivity;
 
 public class CategoryActivity extends AppCompatActivity {
 
-    FrameLayout hypermarket_framelayout;
+    private FrameLayout hypermarket_framelayout,pharmacy;
     private Toolbar toolbar;
     private FrameLayout restaurant;
 
@@ -44,7 +45,19 @@ public class CategoryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        pharmacy=(FrameLayout)findViewById(R.id.pharmacy);
+        pharmacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CategoryActivity.this, MainPharmacy.class));
+            }
+        });
+
+
     }
+
+
 
     private void initView() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);

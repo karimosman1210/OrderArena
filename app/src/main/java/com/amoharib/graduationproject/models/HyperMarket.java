@@ -3,9 +3,6 @@ package com.amoharib.graduationproject.models;
 import java.io.Serializable;
 import java.io.Serializable;
 
-/**
- * Created by Abdel Rahman on 18-May-18.
- */
 
 public class HyperMarket implements Serializable {
     private String title, description, logo, id, token;

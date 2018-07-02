@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.amoharib.graduationproject">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -38,10 +37,6 @@
         <activity android:name=".buyer.activities.OrderActivity" />
         <activity android:name=".buyer.activities.PaymentActivity" />
         <activity android:name=".buyer.activities.AddressSelectionActivity" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -120,7 +115,9 @@
         <activity android:name=".hypermarket.activities.AddressSelectionMarketActivity" />
         <activity android:name=".hypermarket.activities.PaymentMarketActivity" />
         <activity android:name=".hypermarket.activities.TrackOrderMarketActivity" />
-        <activity android:name=".buyer.activities.MapsActivity"></activity>
+        <activity android:name=".Pharmacy.Activities.MainPharmacy" />
+        <activity android:name=".Pharmacy.Activities.MenuPharmacy" />
+        <activity android:name=".Pharmacy.Activities.PharmacyItem"></activity>
     </application>
 
 </manifest>

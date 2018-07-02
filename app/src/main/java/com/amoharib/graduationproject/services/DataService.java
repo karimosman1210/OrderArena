@@ -8,10 +8,12 @@ import com.amoharib.graduationproject.buyer.activities.MenuActivity;
 import com.amoharib.graduationproject.buyer.adapters.MenuAdapter;
 import com.amoharib.graduationproject.interfaces.DataListeners;
 import com.amoharib.graduationproject.models.Address;
+import com.amoharib.graduationproject.models.AllPharmacy;
 import com.amoharib.graduationproject.models.CartItem;
 import com.amoharib.graduationproject.models.Food;
 import com.amoharib.graduationproject.models.MarketItem;
 import com.amoharib.graduationproject.models.Order;
+import com.amoharib.graduationproject.models.PharmacyItem;
 import com.amoharib.graduationproject.models.Restaurant;
 import com.amoharib.graduationproject.models.HyperMarket;
 import com.amoharib.graduationproject.models.User;
@@ -36,9 +38,6 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Created by AMoharib on 2018-03-25.
- */
 
 public class DataService {
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -57,9 +56,11 @@ public class DataService {
     private DatabaseReference usersDB = db.child("users");
     private DatabaseReference categoryDB = db.child("category");
     private DatabaseReference categoryMarketDB = db.child("category-market");
+    private DatabaseReference catregoryPharmacyDB=db.child("category-pharmacy");
     private DatabaseReference menuDB = db.child("menu");
     private DatabaseReference menuMarketDB = db.child("menu-market");
-
+    private DatabaseReference pharmacyDB=db.child("pharmacy");
+    private DatabaseReference menuPharmacyDB=db.child("menu-Pharmacy");
 
     private static final DataService ourInstance = new DataService();
 
@@ -254,6 +255,28 @@ public class DataService {
             }
         });
     }
+    public void getAllPharmacy(final DataListeners.OnPharmacyListener onPharmacyListener) {
+
+        final ArrayList<AllPharmacy> listPharm=new ArrayList<>();
+        pharmacyDB.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot phrms:dataSnapshot.getChildren()){
+                    AllPharmacy allPharmacy=phrms.getValue(AllPharmacy.class);
+                    listPharm.add(allPharmacy);
+                }
+                onPharmacyListener.onDatretreved(listPharm);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
 
     public void getAllHyperMarket(final DataListeners.OnHyperMarketsListener onHyperMarketsListener) {
 
@@ -538,6 +561,40 @@ public class DataService {
         });
     }
 
+    public void getMenuForPharmacyId(final String farmId,final DataListeners.OnMenuPharmacyListener onMenuPharmacyListener){
+
+        getCategoriesForPharmacy(farmId, new DataListeners.OnCategoryPharmacyListener() {
+            @Override
+            public void onCategoriesRetrieved(ArrayList<String> categories) {
+                for (final String categoryPharm:categories){
+
+                    menuPharmacyDB.child(farmId).child(categoryPharm).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            ArrayList<PharmacyItem> pharmacyItems =new ArrayList<>();
+                            for (DataSnapshot allItem :dataSnapshot.getChildren()){
+                                pharmacyItems.add(allItem.getValue(PharmacyItem.class));
+                            }
+                            onMenuPharmacyListener.onMenuPharmacyRetrieved(pharmacyItems,categoryPharm);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCategoriesNotFound() {
+
+            }
+        });
+
+    }
+
     public void getMenuForMarketId(final String marketid, final DataListeners.OnMenuMarketListener onMenuMarketListener) {
         getCategoriesForHyperMarket(marketid, new DataListeners.OnCategoryMarketListener() {
             @Override
@@ -571,7 +628,6 @@ public class DataService {
 
     }
 
-
     public void deleteMenuItemForRestaurant(String restId, String category, String itemId, final DataListeners.DataListener dataListener) {
         menuDB.child(restId).child(category).child(itemId).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -600,6 +656,32 @@ public class DataService {
         });
     }
 
+    public void getCategoriesForPharmacy(String framId, final DataListeners.OnCategoryPharmacyListener onCategoryPharmacyListener){
+    catregoryPharmacyDB.child(framId).orderByValue().addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            ArrayList<String> pharmCat=new ArrayList<>();
+            for (DataSnapshot allItemPharm:dataSnapshot.getChildren()){
+                String category=allItemPharm.getKey();
+                pharmCat.add(category);
+
+            }
+
+            onCategoryPharmacyListener.onCategoriesRetrieved(pharmCat);
+
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    });
+
+    }
+
+
+
+
     public void getCategoriesForHyperMarket(String marketId, final DataListeners.OnCategoryMarketListener onCategoryMarketListener) {
         categoryMarketDB.child(marketId).orderByValue().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -618,6 +700,8 @@ public class DataService {
             }
         });
     }
+
+
 
     public void uploadFoodItem(final String restId, final String category, boolean isNewCategory, int categoryCount, final Food food, final DataListeners.DataListener dataListener, final DataListeners.UploadImageListener uploadImageListener) {
         if (isNewCategory) {
