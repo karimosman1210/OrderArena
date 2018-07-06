@@ -43,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-}
+    }
 
     private void initAnimations() {
         Animation slideInAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_in);
@@ -126,6 +126,8 @@ public class SplashActivity extends AppCompatActivity {
 
                 } else {
                     progressLoader.setVisibility(View.INVISIBLE);
+                    startActivity(new Intent(SplashActivity.this, UserLoginActivity.class));
+                    finish();
                     //initInputAnimations();
                 }
             }
