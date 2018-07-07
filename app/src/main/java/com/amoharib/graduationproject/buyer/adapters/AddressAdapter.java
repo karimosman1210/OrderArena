@@ -46,41 +46,6 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressViewHolder> impl
         final Address address = addresses.get(position);
         holder.updateUI(address);
 
-        holder.editBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.startActivity(new Intent(activity, EditAddressActivity.class).putExtra("address", address));
-            }
-        });
-
-        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DataService.getInstance().deleteAddress(FirebaseAuth.getInstance().getCurrentUser().getUid(), address.getId(), position, AddressAdapter.this);
-            }
-        });
-
-        if (activity instanceof AddressSelectionActivity) {
-
-
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    activity.startActivity(new Intent(activity, PaymentActivity.class).putExtra("address", address));
-                }
-            });
-        }
-        else if (activity instanceof AddressSelectionMarketActivity){
-
-
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    activity.startActivity(new Intent(activity, PaymentMarketActivity.class).putExtra("address", address));
-                }
-            });
-        }
-
     }
 
     @Override

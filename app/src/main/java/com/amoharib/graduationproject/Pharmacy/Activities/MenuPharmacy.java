@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amoharib.graduationproject.Pharmacy.adapters.MenuPharmAdapter;
 import com.amoharib.graduationproject.R;
@@ -63,6 +65,20 @@ public class MenuPharmacy extends AppCompatActivity {
                 //   adapter.addSection(new MenuAdapter(pharmacyItems,pharmacyItems,category,MenuPharmacy.this))
                 adapter.addSection(new MenuPharmAdapter(pharmacyItems, pharmacyItems, category, MenuPharmacy.this));
                 updateAdapter();
+            }
+        });
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (StaticConfig.CART_ITEMS.isEmpty()){
+                    Toast.makeText(MenuPharmacy.this, "your Card impty", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    startActivity(new Intent(MenuPharmacy.this,OrderPharmacy.class));
+                }
+
+
             }
         });
 

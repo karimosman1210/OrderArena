@@ -7,19 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.amoharib.graduationproject.Pharmacy.Activities.OrderPharmacy;
+import com.amoharib.graduationproject.R;
 import com.amoharib.graduationproject.buyer.activities.OrderActivity;
+import com.amoharib.graduationproject.buyer.viewholders.OrderViewHolder;
 import com.amoharib.graduationproject.hypermarket.activities.OrderMarketActivity;
 import com.amoharib.graduationproject.models.CartItem;
-import com.amoharib.graduationproject.R;
-import com.amoharib.graduationproject.buyer.viewholders.OrderViewHolder;
 
 import java.util.ArrayList;
 
 
-
 public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
 
-    public static final int RESTAURANT = 0, MARKET = 1;
+    public static final int RESTAURANT = 0, MARKET = 1, Pharmacy = 2;
 
     private ArrayList<CartItem> cartItems;
     private Context activity;
@@ -92,8 +92,32 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
                 }
             });
         }
-    }
+       else if (activity instanceof OrderPharmacy) {
+            holder.updateUI(cartItem, Pharmacy);
 
+            holder.incQuantityBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((OrderPharmacy) activity).incQuantity(holder.getAdapterPosition());
+                    if (!holder.decQuantityBtn.isEnabled()) holder.decQuantityBtn.setEnabled(true);
+                    notifyItemChanged(holder.getAdapterPosition());
+                }
+            });
+
+            holder.decQuantityBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (cartItem.getQuantity() > 1) {
+                        ((OrderPharmacy) activity).decQuantity(holder.getAdapterPosition());
+                    }
+                    if (cartItem.getQuantity() == 1) {
+                        holder.decQuantityBtn.setEnabled(false);
+                    }
+                    notifyItemChanged(holder.getAdapterPosition());
+
+                }
+            });
+        }}
     @Override
     public int getItemCount() {
         return cartItems.size();

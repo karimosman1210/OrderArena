@@ -117,7 +117,9 @@
         <activity android:name=".hypermarket.activities.TrackOrderMarketActivity" />
         <activity android:name=".Pharmacy.Activities.MainPharmacy" />
         <activity android:name=".Pharmacy.Activities.MenuPharmacy" />
-        <activity android:name=".Pharmacy.Activities.PharmacyItem"></activity>
+        <activity android:name=".Pharmacy.Activities.PharmacyItem" />
+        <activity android:name=".Pharmacy.Activities.OrderPharmacy" />
+        <activity android:name=".Pharmacy.Activities.AddressSelectionPharmacy"></activity>
     </application>
 
 </manifest>

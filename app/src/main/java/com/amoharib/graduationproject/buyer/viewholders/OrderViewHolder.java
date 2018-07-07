@@ -36,10 +36,16 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
             case OrderAdapter.RESTAURANT:
                 foodName.setText(cartItem.getFood().getName());
                 break;
+
+              case OrderAdapter.Pharmacy:
+                  foodName.setText(cartItem.getPharmacyItem().getName());
+
+
         }
         foodCustomOrder.setText(cartItem.getCustomOrder());
         //subTotalPrice.setText(String.valueOf(cartItem.getQuantity() * Float.parseFloat(cartItem.getFood().getPrice())));
 
         if (cartItem.getQuantity() == 1) decQuantityBtn.setEnabled(false);
+
     }
 }

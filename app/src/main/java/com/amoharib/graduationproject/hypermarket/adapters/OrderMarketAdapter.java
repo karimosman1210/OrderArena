@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.amoharib.graduationproject.Pharmacy.Activities.OrderPharmacy;
 import com.amoharib.graduationproject.R;
 import com.amoharib.graduationproject.buyer.activities.OrderActivity;
 import com.amoharib.graduationproject.buyer.viewholders.OrderViewHolder;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 public class OrderMarketAdapter extends RecyclerView.Adapter<OrderViewHolder> {
 
 
-        public static final int RESTAURANT = 0, MARKET = 1;
+    public static final int RESTAURANT = 0, MARKET = 1,pharmacy=2;
 
         private ArrayList<CartItem> cartItems;
         private Context activity;
@@ -104,6 +105,34 @@ public class OrderMarketAdapter extends RecyclerView.Adapter<OrderViewHolder> {
 
                     }
                 });
+            }else if (activity instanceof OrderPharmacy){
+
+                holder.updateUI(cartItem,pharmacy);
+                holder.incQuantityBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ((OrderPharmacy) activity).incQuantity(holder.getAdapterPosition());
+                        if (!holder.decQuantityBtn.isEnabled()) holder.decQuantityBtn.setEnabled(true);
+                        notifyItemChanged(holder.getAdapterPosition());
+                    }
+                });
+                holder.decQuantityBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if (cartItem.getQuantity() > 1) {
+                            ((OrderPharmacy) activity).decQuantity(holder.getAdapterPosition());
+                        }
+                        if (cartItem.getQuantity() == 1) {
+                            holder.decQuantityBtn.setEnabled(false);
+                        }
+                        notifyItemChanged(holder.getAdapterPosition());
+
+                    }
+                });
+
+
+
             }
         }
 
