@@ -29,6 +29,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -148,6 +149,7 @@ public class TrackOrderActivity extends AppCompatActivity implements DataListene
                 sentTimeLine.setMarker(VectorDrawableUtils.getDrawable(this, R.drawable.ic_done));
                 seenTimeLine.setMarker(VectorDrawableUtils.getDrawable(this, R.drawable.ic_done));
                 onTheWayTimeLine.setMarker(VectorDrawableUtils.getDrawable(this, R.drawable.ic_done));
+                getDriverLocation();
                 break;
         }
 
@@ -172,7 +174,6 @@ public class TrackOrderActivity extends AppCompatActivity implements DataListene
 
         mMap = googleMap;
 //        mMap.setMinZoomPreference(2.0f);
-        getDriverLocation();
         enableCurrentLocation();
 
     }
@@ -200,32 +201,44 @@ public class TrackOrderActivity extends AppCompatActivity implements DataListene
     boolean first = true;
 
     private void getDriverLocation() {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driver/0/current-location/l");
-        ref.addValueEventListener(new ValueEventListener() {
+
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("order");
+        mRef.child(orderId).child("captainId").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                double latitude = 0.0;
-                double longitude = 0.0;
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("captain/" + dataSnapshot.getValue(String.class) + "/current-location/l");
+                ref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        double latitude = 0.0;
+                        double longitude = 0.0;
 
-                if (driverMarker != null) driverMarker.remove();
+                        if (driverMarker != null) driverMarker.remove();
 
-                List<Double> location = (List<Double>) dataSnapshot.getValue();
+                        List<Double> location = (List<Double>) dataSnapshot.getValue();
 
-                latitude = location.get(0);
-                longitude = location.get(1);
+                        latitude = location.get(0);
+                        longitude = location.get(1);
 
-                LatLng driverLocation = new LatLng(latitude, longitude);
+                        LatLng driverLocation = new LatLng(latitude, longitude);
 
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(driverLocation);
-                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_car));
+                        MarkerOptions markerOptions = new MarkerOptions();
+                        markerOptions.position(driverLocation);
+                        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.pin));
 
-                driverMarker = mMap.addMarker(markerOptions);
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(driverLocation));
-                if (first) {
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
-                    first = false;
-                }
+                        driverMarker = mMap.addMarker(markerOptions);
+                        mMap.animateCamera(CameraUpdateFactory.newLatLng(driverLocation));
+                        if (first) {
+                            mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+                            first = false;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
 
             @Override
@@ -233,5 +246,6 @@ public class TrackOrderActivity extends AppCompatActivity implements DataListene
 
             }
         });
+
     }
 }
